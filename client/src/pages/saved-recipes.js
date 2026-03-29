@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
+import { API_BASE_URL } from "../apiConfig";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { RecipeCard, CardSkeleton } from "../components/RecipeCard";
@@ -19,7 +20,7 @@ export const SavedRecipes = () => {
       return;
     }
 
-    axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/savedRecipes/${userID}`)
+    axios.get(`${API_BASE_URL}/recipes/savedRecipes/${userID}`)
       .then(r => setSaved(r.data.savedRecipes.length ? r.data.savedRecipes : FALLBACK_RECIPES))
       .catch(() => setSaved(FALLBACK_RECIPES))
       .finally(() => setLoading(false));

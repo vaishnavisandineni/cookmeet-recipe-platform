@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../apiConfig";
 import { Menu, ArrowRight, Sparkles, PlusCircle } from "lucide-react";
 import { RecipeCard } from "../components/RecipeCard";
 import { FilterSidebar } from "../components/FilterSidebar";
@@ -28,7 +29,7 @@ export const Explore = () => {
           if (cat !== "All") qs.append("category", cat);
 
           const { data } = await axios.get(
-            `https://cookmeet-recipe-backend.onrender.com/recipes?${qs}`
+            `${API_BASE_URL}/recipes?${qs}`
           );
           setRecipes(data.length > 0 ? data : FALLBACK_RECIPES);
         } catch (err) {

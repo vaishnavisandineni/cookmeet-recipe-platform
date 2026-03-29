@@ -3,6 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ChefHat, Eye, EyeOff, User, Lock } from "lucide-react";
+import { API_BASE_URL } from "../apiConfig";
 
 const TABS = ["Login", "Register"];
 
@@ -90,7 +91,7 @@ const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post("https://cookmeet-recipe-backend.onrender.com/auth/login", { username, password });
+      const { data } = await axios.post(`${API_BASE_URL}/auth/login`, { username, password });
       if (data.message) { alert(data.message); return; }
       setCookies("access_token", data.token);
       window.localStorage.setItem("userID", data.userID);
@@ -136,7 +137,7 @@ const RegisterForm = ({ onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post("https://cookmeet-recipe-backend.onrender.com/auth/register", { username, password });
+      const { data } = await axios.post(`${API_BASE_URL}/auth/register`, { username, password });
       alert(data.message || "Registered! Please login.");
       onSuccess();
     } catch { alert("Registration failed. Username may be taken."); }

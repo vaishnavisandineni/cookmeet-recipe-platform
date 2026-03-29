@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../apiConfig";
 import { useCookies } from "react-cookie";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { FALLBACK_RECIPES } from "../data/fallbackRecipes";
@@ -21,7 +22,7 @@ export const RecipeDetails = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const { data } = await axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/${id}`);
+        const { data } = await axios.get(`${API_BASE_URL}/recipes/${id}`);
         setRecipe(data);
       } catch {
         const fallback = FALLBACK_RECIPES.find(r => r._id === id);
@@ -31,7 +32,7 @@ export const RecipeDetails = () => {
     const fetchSaved = async () => {
       if (!userID) return;
       try {
-        const { data } = await axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/savedRecipes/ids/${userID}`);
+        const { data } = await axios.get(`${API_BASE_URL}/recipes/savedRecipes/ids/${userID}`);
         if (data.savedRecipes?.includes(id)) setSaved(true);
       } catch {}
     };
@@ -41,7 +42,7 @@ export const RecipeDetails = () => {
   const saveRecipe = async () => {
     if (!cookies.access_token) { navigate("/auth"); return; }
     try {
-      await axios.put("https://cookmeet-recipe-backend.onrender.com/recipes", { recipeID: id, userID });
+      await axios.put(`${API_BASE_URL}/recipes`, { recipeID: id, userID });
       setSaved(true);
     } catch (e) { console.error(e); }
   };

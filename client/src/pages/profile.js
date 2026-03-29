@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../apiConfig";
 import { User, Heart, Book, Settings, LogOut, Loader2, ChevronRight, CheckCircle } from "lucide-react";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
@@ -28,12 +29,12 @@ export const Profile = () => {
       }
       try {
         // Fetch all recipes and filter by owner for count (or use specialized endpoint if available)
-        const resAll = await axios.get("https://cookmeet-recipe-backend.onrender.com/recipes");
+        const resAll = await axios.get(`${API_BASE_URL}/recipes`);
         const userRecipes = resAll.data.filter(r => r.userOwner === userID);
         setMyRecipes(userRecipes);
 
         // Fetch saved recipes
-        const resSaved = await axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/savedRecipes/${userID}`);
+        const resSaved = await axios.get(`${API_BASE_URL}/recipes/savedRecipes/${userID}`);
         setSavedRecipes(resSaved.data.savedRecipes || []);
 
         setLoading(false);

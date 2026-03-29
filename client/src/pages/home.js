@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../apiConfig";
 import { ArrowRight, Search } from "lucide-react";
 import { RecipeCard, CardSkeleton } from "../components/RecipeCard";
 import { FALLBACK_RECIPES } from "../data/fallbackRecipes";
@@ -12,7 +13,7 @@ export const Home = () => {
 
   useEffect(() => {
     axios
-      .get("https://cookmeet-recipe-backend.onrender.com/recipes")
+      .get(`${API_BASE_URL}/recipes`)
       .then((r) =>
         setRecipes(
           r.data.length >= 8

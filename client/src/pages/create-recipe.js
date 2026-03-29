@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../apiConfig";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -46,7 +47,7 @@ export const CreateRecipe = () => {
 
     setSubmitting(true);
     try {
-      await axios.post("https://cookmeet-recipe-backend.onrender.com/recipes", recipe, {
+      await axios.post(`${API_BASE_URL}/recipes`, recipe, {
         headers: { authorization: cookies.access_token },
       });
       navigate("/profile");
