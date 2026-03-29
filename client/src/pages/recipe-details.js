@@ -21,7 +21,7 @@ export const RecipeDetails = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:3001/recipes/${id}`);
+        const { data } = await axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/${id}`);
         setRecipe(data);
       } catch {
         const fallback = FALLBACK_RECIPES.find(r => r._id === id);
@@ -31,7 +31,7 @@ export const RecipeDetails = () => {
     const fetchSaved = async () => {
       if (!userID) return;
       try {
-        const { data } = await axios.get(`http://localhost:3001/recipes/savedRecipes/ids/${userID}`);
+        const { data } = await axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/savedRecipes/ids/${userID}`);
         if (data.savedRecipes?.includes(id)) setSaved(true);
       } catch {}
     };
@@ -41,7 +41,7 @@ export const RecipeDetails = () => {
   const saveRecipe = async () => {
     if (!cookies.access_token) { navigate("/auth"); return; }
     try {
-      await axios.put("http://localhost:3001/recipes", { recipeID: id, userID });
+      await axios.put("https://cookmeet-recipe-backend.onrender.com/recipes", { recipeID: id, userID });
       setSaved(true);
     } catch (e) { console.error(e); }
   };

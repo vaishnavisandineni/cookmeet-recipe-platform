@@ -12,7 +12,7 @@ export const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/recipes")
+      .get("https://cookmeet-recipe-backend.onrender.com/recipes")
       .then((r) =>
         setRecipes(
           r.data.length >= 8

@@ -46,7 +46,7 @@ export const CreateRecipe = () => {
 
     setSubmitting(true);
     try {
-      await axios.post("http://localhost:3001/recipes", recipe, {
+      await axios.post("https://cookmeet-recipe-backend.onrender.com/recipes", recipe, {
         headers: { authorization: cookies.access_token },
       });
       navigate("/profile");

@@ -28,7 +28,7 @@ export const Explore = () => {
           if (cat !== "All") qs.append("category", cat);
 
           const { data } = await axios.get(
-            `http://localhost:3001/recipes?${qs}`
+            `https://cookmeet-recipe-backend.onrender.com/recipes?${qs}`
           );
           setRecipes(data.length > 0 ? data : FALLBACK_RECIPES);
         } catch (err) {

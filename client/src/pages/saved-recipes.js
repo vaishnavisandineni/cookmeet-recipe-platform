@@ -19,7 +19,7 @@ export const SavedRecipes = () => {
       return;
     }
 
-    axios.get(`http://localhost:3001/recipes/savedRecipes/${userID}`)
+    axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/savedRecipes/${userID}`)
       .then(r => setSaved(r.data.savedRecipes.length ? r.data.savedRecipes : FALLBACK_RECIPES))
       .catch(() => setSaved(FALLBACK_RECIPES))
       .finally(() => setLoading(false));

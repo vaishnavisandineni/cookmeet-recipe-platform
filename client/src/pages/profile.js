@@ -28,12 +28,12 @@ export const Profile = () => {
       }
       try {
         // Fetch all recipes and filter by owner for count (or use specialized endpoint if available)
-        const resAll = await axios.get("http://localhost:3001/recipes");
+        const resAll = await axios.get("https://cookmeet-recipe-backend.onrender.com/recipes");
         const userRecipes = resAll.data.filter(r => r.userOwner === userID);
         setMyRecipes(userRecipes);
 
         // Fetch saved recipes
-        const resSaved = await axios.get(`http://localhost:3001/recipes/savedRecipes/${userID}`);
+        const resSaved = await axios.get(`https://cookmeet-recipe-backend.onrender.com/recipes/savedRecipes/${userID}`);
         setSavedRecipes(resSaved.data.savedRecipes || []);
 
         setLoading(false);
