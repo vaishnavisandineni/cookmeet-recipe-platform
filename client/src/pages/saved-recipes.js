@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Heart, LogIn } from "lucide-react";
+import { Heart } from "lucide-react";
 import { RecipeCard, CardSkeleton } from "../components/RecipeCard";
 import { FALLBACK_RECIPES } from "../data/fallbackRecipes";
 
